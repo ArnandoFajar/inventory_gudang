@@ -6,7 +6,7 @@ $out = new Library();
 if (isset($_GET['id_tabel']) && ($_GET['tabel'])) {
     $id = $_GET['id_tabel'];
     $tabel = $_GET['tabel'];
-    $data = $lib->get_data_keluar($tabel, $id);
+    $data = $lib->get_data_tabel($tabel, $id);
 }
 if (isset($_POST['tombol_update'])) {
     //input data keluar
@@ -16,15 +16,15 @@ if (isset($_POST['tombol_update'])) {
     $berat = $_POST['berat'];
     $harga = $_POST['harga'];
     $stok_awal = $_POST['stok'];
-    $keluar = $_POST['stok_keluar'];
-    $stok_akhir = $stok_awal - $keluar;
-    //$lib->update($tabel, $id_tabel, $nama, $berat, $harga, $stok_akhir);
+    $stok_keluar = $_POST['stok_keluar'];
+    $stok_akhir = $stok_awal - $stok_keluar;
+    $lib->update($tabel, $id_tabel, $nama, $berat, $harga, $stok_akhir);
 
     //input riwayat transaksi
     $tanggal = date("d-F-Y");
     $jenis_data = "Barang Keluar";
-    $total_harga = $keluar * $harga;
-    $status_update = $out->riwayat_keluar($tanggal, $nama, $berat, $harga, $jenis_data, $keluar, $total_harga);
+    $total_harga = $stok_keluar * $harga;
+    $status_update = $out->riwayat($tanggal, $nama, $berat, $harga, $jenis_data, $stok_keluar, $total_harga);
     if ($status_update) {
         echo "<script>alert('Data yang anda Update sukses');window.location='barang_keluar.php'</script>";
     }
@@ -36,23 +36,6 @@ include('view/sidebar.php');
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <div class="content">

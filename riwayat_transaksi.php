@@ -37,7 +37,8 @@ include('view/sidebar.php');
                                 <td><?php echo $row['nama'] ?></td>
                                 <td><?php echo $row['berat'] ?></td>
                                 <td><?php echo $row['harga'] ?></td>
-                                <td><?php echo $row['jenis_data'] ?></td>
+                                <td class="<?php if ($row['jenis_data'] == 'Barang Keluar') echo 'bg-gradient-success';
+                                            else echo 'bg-gradient-danger'; ?>"><?php echo $row['jenis_data'] ?></td>
                                 <td><?php echo $row['stok'] ?></td>
                                 <td><?php echo $row['total_harga'] ?></td>
                             <?php $no++;

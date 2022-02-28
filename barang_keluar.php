@@ -8,9 +8,6 @@ $tabel = '';
 if (isset($_POST['check'])) {
     $tabel = $_POST['tabel'];
     $hasil = $lib->check($tabel);
-    if (!empty($hasil)) {
-        echo "pilih data";
-    }
 }
 ?>
 <div class="content-wrapper">
@@ -63,11 +60,13 @@ if (isset($_POST['check'])) {
                                         <td><?php echo $row['stok'] ?></td>
                                         <td>
                                             <a class="btn btn-info" href="form_keluar.php?id_tabel=<?php echo $check_id; ?>&tabel=<?php echo $tabel; ?>">Edit</a>
-                                            <?php if ($row['stok'] == 0) echo "<a class='btn btn-danger' href='hapus.php?id_tabel=$check_id&tabel=$tabel'>Delete</a>"  ?>
+                                            <?php if ($row['stok'] <= 0) echo "<a class='btn btn-danger' href='hapus.php?id_tabel=$check_id&tabel=$tabel'>Delete</a>"  ?>
                                         </td>
                                     </tr>
                             <?php $no++;
                                 }
+                            } else {
+                                echo "<p class = 'text-red alert alert-light'>Mohon check data terlebih dahulu </p>";
                             } ?>
                         </tbody>
                     </table>

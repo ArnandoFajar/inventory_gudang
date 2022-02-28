@@ -42,12 +42,19 @@ class Library
         $hasil = $data[0];
         return $hasil;
     }
-    public function sum_riwayat()
+    public function sum_riwayat_keluar()
     {
-        $query = $this->db->query('SELECT SUM(total_harga) FROM tb_riwayat WHERE jenis_data= "barang keluar" ');
+        $query = $this->db->query('SELECT SUM(total_harga) FROM tb_riwayat WHERE jenis_data= "Barang Keluar" ');
         $data = $query->fetch();
         $hasil = $data[0];
         return $hasil;
+    }
+    public function sum_riwayat_masuk()
+    {
+        $query = $this->db->prepare("SELECT SUM(total_harga) FROM tb_riwayat WHERE jenis_data = 'Barang Masuk' ");
+        $query->execute();
+        $data = $query->fetch();
+        return $data[0];
     }
 
     //Data Barang.php
@@ -78,7 +85,7 @@ class Library
         return $data;
     }
 
-    // Barang Masuk.php
+    // Tambah Barang.php
     public function tambah_barang($tabel, $nama, $berat, $harga, $stok)
     {
         $tb = htmlentities($tabel);
@@ -119,7 +126,7 @@ class Library
     }
 
     // Form keluar.php, Mengambil data 
-    public function get_data_keluar($tabel, $id_tabel)
+    public function get_data_tabel($tabel, $id_tabel)
     {
         if ($tabel == 'tb_mie') {
             $id = 'id_mie';
@@ -158,7 +165,7 @@ class Library
         $query->execute();
         return $query->rowCount();
     }
-    public function riwayat_keluar($tanggal, $nama, $berat, $harga, $jenis_data, $stok, $total_harga)
+    public function riwayat($tanggal, $nama, $berat, $harga, $jenis_data, $stok, $total_harga)
     {
         $query = $this->db->prepare("INSERT INTO tb_riwayat(tanggal,nama,berat,harga,jenis_data,stok,total_harga) 
                                     VALUES ('$tanggal','$nama','$berat','$harga','$jenis_data','$stok','$total_harga')");

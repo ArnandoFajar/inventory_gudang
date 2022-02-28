@@ -7,7 +7,8 @@ $hitung_mie = $lib->sum_mie();
 $hitung_minyak = $lib->sum_minyak();
 $hitung_terigu = $lib->sum_terigu();
 $hitung_plastik = $lib->sum_plastik();
-$hitung_riwayat = $lib->sum_riwayat();
+$hitung_riwayat_keluar = $lib->sum_riwayat_keluar();
+$hitung_riwayat_masuk = $lib->sum_riwayat_masuk();
 
 include 'view/header.php';
 include 'view/sidebar.php';
@@ -88,9 +89,9 @@ include 'view/sidebar.php';
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3><?php echo $hitung_plastik; ?></h3>
+                <h3><?php echo $hitung_plastik; ?></p>
 
-                <p>Stok Plastik</p>
+                  <p>Stok Plastik</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -105,9 +106,23 @@ include 'view/sidebar.php';
             <!-- small box -->
             <div class="small-box bg-white">
               <div class="inner">
-                <h3><?php echo "Rp " . number_format($hitung_riwayat, 0, ",", "."); ?></h3>
+                <h4><?php echo "Rp " . number_format($hitung_riwayat_keluar, 0, ",", "."); ?></h4>
 
-                <p>Riwayat Harga Keluar</p>
+                <p class="text-green font-weight-bold">Riwayat Barang Keluar</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="riwayat_transaksi.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-white">
+              <div class="inner">
+                <h4><?php echo "Rp " . number_format($hitung_riwayat_masuk, 0, ",", "."); ?></h4>
+
+                <p class="font-weight-bold">Riwayat Barang Masuk</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
